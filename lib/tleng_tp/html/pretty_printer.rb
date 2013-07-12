@@ -38,17 +38,23 @@ module TLengTP
       # Nodes visitor methods
       def handle_root(node)
         print_doc_header
-        handle_compound_node(node)
+        handle_compound_tag(node)
         print_doc_footer
       end
 
-      def handle_compound_node(node)
+      def handle_compound_tag(node)
         print_between_tags_for(node) do
           idented { pretty_print_childs(node) }
         end
       end
 
-      def handle_content_node(node)
+      def handle_paragraph_tag(node)
+        print_between_tags_for(node) do
+          pretty_print_childs(node)
+        end
+      end
+
+      def handle_simple_tag(node)
         print_content_between_tags_for(node)
       end
 

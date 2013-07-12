@@ -9,13 +9,13 @@ module TLengTP
     end
 
     # Abstract class representing a generic HTML tag
-    class TagNode
+    class Tag < Node
       def tag_name
         self.class.class_name.downcase
       end
     end
 
-    class ContentNode < TagNode
+    class SimpleTag < Tag
       attr_reader :content
 
       def initialize(content)
@@ -23,11 +23,11 @@ module TLengTP
       end
 
       def accept(visitor)
-        visitor.handle_content_node(self)
+        visitor.handle_simple_tag(self)
       end
     end
 
-    class CompoundNode < TagNode
+    class CompoundTag < Tag
       attr_reader :childs
 
       def initialize(childs = [])
@@ -35,12 +35,11 @@ module TLengTP
       end
 
       def accept(visitor)
-        visitor.handle_compound_node(self)
+        visitor.handle_compound_tag(self)
       end
     end
 
-
-    class Root < CompoundNode
+    class Root < CompoundTag
       def tag_name
         'html'
       end
@@ -50,30 +49,33 @@ module TLengTP
       end
     end
 
-    class Head < CompoundNode
+    class P < CompoundTag
+      def accept(visitor)
+        visitor.handle_paragraph_tag(self)
+      end
     end
 
-    class Body < CompoundNode
+    class Head < CompoundTag
     end
 
-    class Div < CompoundNode
+    class Body < CompoundTag
     end
 
-
-    class Title < ContentNode
-    end
-
-    class Script < ContentNode
-    end
-
-    class P < ContentNode #TODO: ¿puede tener childs ademas de texto?
-    end
-
-    class H1 < ContentNode #TODO: ¿puede tener childs ademas de texto?
+    class Div < CompoundTag
     end
 
 
-    class Br < TagNode
+    class Title < SimpleTag
+    end
+
+    class Script < SimpleTag
+    end
+
+    class H1 < SimpleTag
+    end
+
+
+    class Br < Tag
       def accept(visitor)
         visitor.handle_line_break(self)
       end
