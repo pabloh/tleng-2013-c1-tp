@@ -1,3 +1,2 @@
-module TlengTP
-  VERSION='0.0.1'
-end
+require 'tleng_tp/html/nodes'
+require 'tleng_tp/html/pretty_printer'
