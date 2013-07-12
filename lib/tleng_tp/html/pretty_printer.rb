@@ -1,83 +1,100 @@
 module TLengTP
   module HTML
-
     class PrettyPrinter
       attr_reader :html, :output
 
-      IDENTATION_CHARS = 8
+      OUTPUT_HEADER = <<-END_HEADER.gsub(/^\s*/,'')
+        <html>
+        <head>
+        <style type='text/css'>
+        div.idented       { margin-left: 2em; }
+        span.script_tag   { color: orange; }
+        span.p_tag        { color: fuchsia; }
+        span.h1_tag       { color : brown; }
+        span.div_tag      { color : red; }
+        span.html_tag     { color : blue; }
+        span.body_tag     { color : green; }
+        span.head_tag     { color : cyan; }
+        span.title_tag    { color : violet; }
+        span.br_tag       { color : yellow; }
+        </style>
+        </head>
+        <body>
+      END_HEADER
+
+      OUTPUT_FOOTER = <<-END_FOOTER.gsub(/^\s*/,'')
+        </body>
+        <html>
+      END_FOOTER
+
       def initialize(html, output)
-        @html, @output, @identation = html, output, ''
+        @html, @output = html, output
       end
 
       def generate_output
-        @html.accept self
+        @html.accept(self)
       end
 
+      # Nodes visitor methods
       def handle_root(node)
+        print_doc_header
+        handle_compound_node(node)
+        print_doc_footer
       end
 
-      def handle_head(node)
+      def handle_compound_node(node)
+        print_between_tags_for(node) do
+          idented { pretty_print_childs(node) }
+        end
       end
 
-      def handle_body(node)
+      def handle_content_node(node)
+        print_content_between_tags_for(node)
       end
 
-      def handle_title(node)
-      end
-
-      def handle_script(node)
-      end
-
-      def handle_div(node)
-      end
-
-      def handle_p(node)
-      end
-
-      def handle_br(node)
+      def handle_line_break(node)
+        print_single_tag_for(node)
       end
 
       def handle_text(node)
+        @output.puts(node.text)
       end
 
     private
-      def write_into_tag(node, &block)
-        write_to_ouput node.opening_tag
+      def print_doc_header
+        @output.print(OUTPUT_HEADER)
+      end
+
+      def print_doc_footer
+        @output.print(OUTPUT_FOOTER)
+      end
+
+      def pretty_print_childs(node)
+        node.childs.each {|child| child.accept(self) }
+      end
+
+      def idented(&block)
+        @output.puts("<div class='idented'>")
         block.call
-        write_to_ouput node.closing_tag
+        @output.puts("</div>")
       end
 
-      def write_into_tag_idented(node)
-        write_to_ouput node.opening_tag
-        identate do
-          write_nl
-          block.call
-        end
-        write_nl
-        write_to_ouput node.closing_tag
-      end
-
-      def write_nl(text)
-        @output.write "\n"
-        @output.write identation
-      end
-
-      def write_to_ouput(text)
-        @output.write text
-      end
-
-      def identate(&block)
-        add_identation
+      def print_between_tags_for(node, &block)
+        @output.puts("<span class='#{css_class_for(node)}'> &lt;#{node.tag_name}&gt; </span>")
         block.call
-        remove_identation
+        @output.puts("<span class='#{css_class_for(node)}'> &lt;/#{node.tag_name}&gt; </span>")
       end
 
-      def add_identation
-        @identation << " " * IDENTATION_CHARS
+      def print_content_between_tags_for(node)
+        print_between_tags_for(node) { @output.puts(node.content) }
       end
 
-      def remove_identation
-        @identation.slice!(0, IDENTATION_CHARS)
+      def print_single_tag_for(node)
+        @output.puts("<span class='#{css_class_for(node)}'> &lt;#{node.tag_name}/&gt; </span>")
+      end
+
+      def css_class_for(node)
+        "#{node.tag_name}_tag"
       end
     end
 

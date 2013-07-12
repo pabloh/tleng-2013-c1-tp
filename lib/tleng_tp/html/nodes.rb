@@ -66,10 +66,10 @@ module TLengTP
     class Script < ContentNode
     end
 
-    class P < ContentNode
+    class P < ContentNode #TODO: ¿puede tener childs ademas de texto?
     end
 
-    class H1 < ContentNode
+    class H1 < ContentNode #TODO: ¿puede tener childs ademas de texto?
     end
 
 
