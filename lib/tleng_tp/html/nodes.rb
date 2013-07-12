@@ -3,96 +3,91 @@ module TLengTP
 
     # Abstract class representing a generic HTML Dom node
     class Node
+      def accept(visitor)
+        raise 'must implement at subclass'
+      end
+    end
+
+    # Abstract class representing a generic HTML tag
+    class TagNode
+      def tag_name
+        self.class.class_name.downcase
+      end
+    end
+
+    class ContentNode < TagNode
+      attr_reader :content
+
+      def initialize(content)
+        @content = content
+      end
+
+      def accept(visitor)
+        visitor.handle_content_node(self)
+      end
+    end
+
+    class CompoundNode < TagNode
       attr_reader :childs
 
       def initialize(childs = [])
         @childs = childs
       end
 
-      def tag_name
-        self.class.name.downcase
-      end
-
-      def opening_tag
-        "<#{tag_name}>"
-      end
-
-      def closing_tag
-        "</#{tag_name}>"
-      end
-
-      def single_tag
-        "<#{tag_name}/>"
-      end
-
       def accept(visitor)
-        raise 'must implement at subclass'
+        visitor.handle_compound_node(self)
       end
-
-      #def block_level?
-        #raise 'must implement at subclass'
-      #end
-
-      #def inline?
-        #raise 'must implement at subclass'
-      #end
     end
 
-    class Root < Node
+
+    class Root < CompoundNode
       def tag_name
         'html'
       end
 
       def accept(visitor)
-        visitor.handle_root self
+        visitor.handle_root(self)
       end
     end
 
-    class Head < Node
-      def accept(visitor)
-        visitor.handle_head self
-      end
+    class Head < CompoundNode
     end
 
-    class Body < Node
-      def accept(visitor)
-        visitor.handle_body self
-      end
+    class Body < CompoundNode
     end
 
-    class Title < Node
-      def accept(visitor)
-        visitor.handle_title self
-      end
+    class Div < CompoundNode
     end
 
-    class Script < Node
-      def accept(visitor)
-        visitor.handle_script self
-      end
+
+    class Title < ContentNode
     end
 
-    class Div < Node
-      def accept(visitor)
-        visitor.handle_div self
-      end
+    class Script < ContentNode
     end
 
-    class P < Node
-      def accept(visitor)
-        visitor.handle_p self
-      end
+    class P < ContentNode
     end
 
-    class Br < Node
+    class H1 < ContentNode
+    end
+
+
+    class Br < TagNode
       def accept(visitor)
-        visitor.handle_br self
+        visitor.handle_line_break(self)
       end
     end
 
     class Text < Node
+      attr_reader :text
+
+      def initialize(text)
+        @text = text
+      end
+
       def accept(visitor)
-        visitor.handle_text self
+        visitor.handle_text(self)
       end
     end
 
