@@ -973,19 +973,20 @@ var msg = 'Esto es javascript!!'; alert(msg);
 
 \end{subsubsection}
 
-
 \begin{subsubsection}{Resultados inválidos}
-\begin{tabular}{|p{6.5cm}|p{6.5cm}|}
-\hline 
-\multicolumn{2}{|c|}{Ejemplo 1}\\
-\hline 
-\textbf{Input}&\textbf{Output}\\
-\hline 
+
+Ejemplo 1
+
+\vskip1em
+
+\textbf{Input}
+
 \footnotesize{\begin{verbatim}
 <html> <head> <title>Documento simple </title> </head><body> <p>Parrafo mal cerrado<p></body> </html>
 \end{verbatim}}
 
-\bigskip
+\textbf{Output}
+
 \footnotesize{\begin{verbatim}
 /home/user/tleng-2013-c1-tp/lib/tleng_tp/parser.rb:31:in `on_error':  (RuntimeError)
 parse error on value "<p>" (P_OPEN)
@@ -993,33 +994,29 @@ parse error on value "<p>" (P_OPEN)
 	from (eval):3:in `do_parse'
 	from /home/user/tleng-2013-c1-tp/lib/tleng_tp/parser.rb:27:in `parse'
 	from bin/html_pp:23:in `<main>'
-\end{verbatim}}\\
-\hline
+\end{verbatim}}
 
-\end{tabular}
+\vskip4em
 
+Ejemplo 2
 
-\begin{tabular}{|p{6.5cm}|p{6.5cm}|}
-\hline 
-\multicolumn{2}{|c|}{Ejemplo 2}\\
-\hline 
-\textbf{Input}&\textbf{Output}\\
-\hline 
+\vskip1em
+
+\textbf{Input}
+
 \footnotesize{\begin{verbatim}
 <html> <head> <title>Documento simple </title> </head><body> <pre>Este tag no es reconocido por el lexer</pre> </body> </html>
 \end{verbatim}}
 
-\bigskip
+\textbf{Output}
+
 \footnotesize{\begin{verbatim}
 /home/user/tleng-2013-c1-tp/lib/tleng_tp/lexer.rb:73:in `next_token': Error parsing input: unrecognized string '<pre>Este' (RuntimeError)
 	from /home/pablo/Proyectos/tleng-2013-c1-tp/lib/tleng_tp/parser.rb:23:in `next_token'
 	from (eval):3:in `_racc_do_parse_c'
 	from (eval):3:in `do_parse'
 	from /home/user/tleng-2013-c1-tp/lib/tleng_tp/parser.rb:27:in `parse'
-\end{verbatim}}\\
-\hline
-
-\end{tabular}
+\end{verbatim}}
 
 \end{subsubsection}
 \end{subsection}
