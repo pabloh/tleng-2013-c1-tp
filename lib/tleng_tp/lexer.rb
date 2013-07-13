@@ -69,7 +69,8 @@ module TLengTP
           [:SCRIPT_OPEN, text]
         else
           text = @scanner.scan(/[^\s]+/)
-          [:ERROR, text]
+
+          raise "Error parsing input: unrecognized string '#{text}'"
         end
     
       end
