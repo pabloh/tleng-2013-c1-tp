@@ -10,36 +10,18 @@ module TLengTP
 
     # Abstract class representing a generic HTML tag
     class Tag < Node
-      def tag_name
-        self.class.class_name.downcase
-      end
-    end
-
-    class SimpleTag < Tag
-      attr_reader :content
-
-      def initialize(content)
-        @content = content
-      end
-
-      def accept(visitor)
-        visitor.handle_simple_tag(self)
-      end
-    end
-
-    class CompoundTag < Tag
       attr_reader :childs
 
       def initialize(childs = [])
         @childs = childs
       end
 
-      def accept(visitor)
-        visitor.handle_compound_tag(self)
+      def tag_name
+        self.class.class_name.downcase
       end
     end
 
-    class Root < CompoundTag
+    class Root < Tag
       def tag_name
         'html'
       end
@@ -49,31 +31,41 @@ module TLengTP
       end
     end
 
-    class P < CompoundTag
+    class Head < Tag
       def accept(visitor)
-        visitor.handle_paragraph_tag(self)
+        visitor.handle_head(self)
       end
     end
 
-    class Head < CompoundTag
+    class Body < Tag
+      def accept(visitor)
+        visitor.handle_body(self)
+      end
     end
 
-    class Body < CompoundTag
+    class Div < Tag
+      def accept(visitor)
+        visitor.handle_block_tag(self)
+      end
     end
 
-    class Div < CompoundTag
+    class Title < Tag
+      def accept(visitor)
+        visitor.handle_title(self)
+      end
     end
 
-
-    class Title < SimpleTag
+    class InlineTag < Tag
+      def accept(visitor)
+        visitor.handle_inline_tag(self)
+      end
     end
 
-    class Script < SimpleTag
+    class P < InlineTag
     end
 
-    class H1 < SimpleTag
+    class H1 < InlineTag
     end
-
 
     class Br < Tag
       def accept(visitor)
@@ -81,11 +73,24 @@ module TLengTP
       end
     end
 
-    class Text < Node
-      attr_reader :text
+    class Script < Tag
+      attr_reader :content
 
-      def initialize(text)
-        @text = text
+      def initialize(content)
+        @content = content
+        @childs = []
+      end
+
+      def accept(visitor)
+        visitor.handle_script(self)
+      end
+    end
+
+    class Text < Node
+      attr_reader :content
+
+      def initialize(content)
+        @content = content
       end
 
       def accept(visitor)
