@@ -1,4 +1,4 @@
-#! /usr/bin/env ruby
+#! /usr/bin/env ruby1.9.1
 
 $: << File.expand_path("../../lib", __FILE__)
 
@@ -21,6 +21,6 @@ if $0 == __FILE__
   lexer = Lexer.new($stdin)
   parser = Parser.new(lexer)
   printer = HTML::PrettyPrinter.new(parser.parse, $stdout)
-  
+
   printer.generate_output
 end
