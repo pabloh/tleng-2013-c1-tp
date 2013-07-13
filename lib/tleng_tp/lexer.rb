@@ -36,7 +36,7 @@ module TLengTP
       return nil if @scanner.eos?
 
       if @inside_script
-        text = @scanner.scan(SCRIPT_CONTENT)
+        text = @scanner.scan(SCRIPT_CONTENT) || ""
         @inside_script = false
         
         [:SCRIPT_CONTENT, text]
