@@ -32,8 +32,10 @@ Pablo Herrero (LU:332/07)   & pablodherrero@gmail.com   \\
 \newpage
 
 \begin{section}{Introducción}
-El Trabajo Práctico consiste en implementar un parser de HTML, el lenguaje de marcado más utilizado hoy en dia para la representación documentos en la World Wide Web
+El Trabajo Práctico consiste en implementar un parser de HTML, el lenguaje de marcado más utilizado hoy en dia para la representación documentos en la World Wide Web.
+
 Los distintos browsers se encargan de mostrar el contenido de las página escritas en HTML de forma tal que sea visualmente actractivo para el usuario.
+
 Para este TP se realizará un procesador que formateará el contenido de una documento HTML, generando un documento nuevo, de manera de que el documento original sea fácilmente legible por cualquiera que comprenda el lenguaje de marcado en cuestion, como se muestra a continuación.
 
 \begin{figure}[h!]
@@ -751,15 +753,19 @@ end
 \begin{subsection}{Resultados}
 
 \begin{subsubsection}{Resultados Válidos}
+\normalsize
 Ejemplo 1
 
 \vskip1em
 
+\noindent
 \textbf{Input}
 \footnotesize{\begin{verbatim}
 <html> <head> <title>Documento simple </title> </head><body> <p>Algo sencillo...</p></body> </html>
 \end{verbatim}}
 
+\normalsize
+\noindent
 \textbf{Output}
 \footnotesize{\begin{verbatim}
 <html>
@@ -805,10 +811,13 @@ span.script_content { color : orange; }
 
 \vskip4em
 
+\normalsize
+\noindent
 Ejemplo 2
 
 \vskip1em
 
+\noindent
 \textbf{Input}
 
 \footnotesize{\begin{verbatim} 
@@ -833,6 +842,8 @@ Algo mas de texto
 </html>
 \end{verbatim}}  
 
+\normalsize
+\noindent
 \textbf{Output}
 
 \footnotesize{\begin{verbatim}
@@ -888,10 +899,13 @@ span.script_content { color : orange; }
 
 \vskip4em
 
+\normalsize
+\noindent
 Ejemplo 3
 
 \vskip1em
 
+\noindent
 \textbf{Input}
 
  \footnotesize{\begin{verbatim}
@@ -902,12 +916,15 @@ var msg = 'Esto es javascript!!'; alert(msg);
 </script>
 </head> <body>
 <div>
-Algo de texto <p> Y un parrafo </p> <br/> <p> <h1> Un encabezado </h1> Y otro parrafo mas despues del linebreak </p> Y algo mas de texto
+Algo de texto <p> Y un parrafo </p> <br/> <p> <h1> Un encabezado </h1> Y otro parrafo mas despues del linebreak </p>
+Y algo mas de texto
 </div>
 </body>
 </html> 
 \end{verbatim}}
 
+\normalsize
+\noindent
 \textbf{Output}
 
 \footnotesize{\begin{verbatim}
@@ -975,20 +992,25 @@ var msg = 'Esto es javascript!!'; alert(msg);
 
 \begin{subsubsection}{Resultados inválidos}
 
+\normalsize
 Ejemplo 1
 
 \vskip1em
 
+\noindent
 \textbf{Input}
 
 \footnotesize{\begin{verbatim}
-<html> <head> <title>Documento simple </title> </head><body> <p>Parrafo mal cerrado<p></body> </html>
+<html> <head> <title>Documento simple </title> </head><body> <p>Parrafo mal cerrado<p>
+</body> </html>
 \end{verbatim}}
 
+\normalsize
+\noindent
 \textbf{Output}
 
 \footnotesize{\begin{verbatim}
-/home/user/tleng-2013-c1-tp/lib/tleng_tp/parser.rb:31:in `on_error':  (RuntimeError)
+/home/user/tleng-tp/lib/tleng_tp/parser.rb:31:in `on_error':  (RuntimeError)
 parse error on value "<p>" (P_OPEN)
 	from (eval):3:in `_racc_do_parse_c'
 	from (eval):3:in `do_parse'
@@ -996,22 +1018,29 @@ parse error on value "<p>" (P_OPEN)
 	from bin/html_pp:23:in `<main>'
 \end{verbatim}}
 
-\vskip4em
+\newpage
 
+\normalsize
+\noindent
 Ejemplo 2
 
 \vskip1em
 
+\noindent
 \textbf{Input}
 
 \footnotesize{\begin{verbatim}
-<html> <head> <title>Documento simple </title> </head><body> <pre>Este tag no es reconocido por el lexer</pre> </body> </html>
+<html> <head> <title>Documento simple </title> </head><body> 
+<pre>Este tag no es reconocido por el lexer</pre> </body> </html>
 \end{verbatim}}
 
+\normalsize
+\noindent
 \textbf{Output}
 
 \footnotesize{\begin{verbatim}
-/home/user/tleng-2013-c1-tp/lib/tleng_tp/lexer.rb:73:in `next_token': Error parsing input: unrecognized string '<pre>Este' (RuntimeError)
+/home/user/tleng-tp/lib/tleng_tp/lexer.rb:73:in `next_token': 
+Error parsing input: unrecognized string '<pre>Este' (RuntimeError)
 	from /home/pablo/Proyectos/tleng-2013-c1-tp/lib/tleng_tp/parser.rb:23:in `next_token'
 	from (eval):3:in `_racc_do_parse_c'
 	from (eval):3:in `do_parse'
@@ -1028,7 +1057,7 @@ El modo de uso y la instalación son extremadamente sencillos y se explican en e
 
 \end{subsection}
 \end{section}
-\newpage
+
 \begin{section}{Conclusiones}
 La materia es muy interesante y deja cierta ganas de indagar un poco más en el tema de compiladores, el TP además resulta una experiencia interesante para dar los primeros pasos en dicho ambito.
 
