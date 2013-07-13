@@ -26,6 +26,10 @@ module TLengTP
   def parse
     do_parse
   end
+
+  def on_error
+    raise sprintf("\nparse error on value %s (%s)", val.inspect, token_to_str(t) || '?')
+  end
 ##### State transition tables begin ###
 
 racc_action_table = [
