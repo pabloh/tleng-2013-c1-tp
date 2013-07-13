@@ -26,7 +26,7 @@ module TLengTP
 
       OUTPUT_FOOTER = <<-END_FOOTER.gsub(/^\s*/,'')
         </body>
-        <html>
+        </html>
       END_FOOTER
 
       def initialize(html, output)
