@@ -21,8 +21,8 @@ module TLengTP
     P_CLOSE         = %r'</p>'
     LINE_BREAK      = %r'<br/>'
 
-    TEXT            = /[^<>\s][^<>]+[^<>\s]/ 
-    SCRIPT_CONTENT  = /.*?(?=<\/script>)/ 
+    TEXT            = /[^<>\s][^<>]+[^<>\s]/m
+    SCRIPT_CONTENT  = /.*?(?=<\/script>)/m
 
     WHITE_SPACE     = /\s+/
     COMMENT         = /<!--.*?-->/

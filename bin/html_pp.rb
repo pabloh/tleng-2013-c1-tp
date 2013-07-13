@@ -18,9 +18,9 @@ if $0 == __FILE__
 
   include TLengTP
 
-  lexer = Lexer.new(&stdin) 
+  lexer = Lexer.new($stdin)
   parser = Parser.new(lexer)
-  printer = HTML::PrettyPrinter.new(parser.parse)
+  printer = HTML::PrettyPrinter.new(parser.parse, $stdout)
   
-  $stdout.print(printer.generate_output)
+  printer.generate_output
 end
