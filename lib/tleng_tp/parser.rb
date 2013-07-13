@@ -27,7 +27,7 @@ module TLengTP
     do_parse
   end
 
-  def on_error
+  def on_error t, val, stack
     raise sprintf("\nparse error on value %s (%s)", val.inspect, token_to_str(t) || '?')
   end
 ##### State transition tables begin ###

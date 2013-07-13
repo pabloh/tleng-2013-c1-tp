@@ -2,7 +2,7 @@ require 'strscan'
 
 module TLengTP
   class Lexer
-    # Tokens
+    # Tokens lexicos
     HTML_OPEN       = %r'<html>'
     HTML_CLOSE      = %r'</html>'
     HEAD_OPEN       = %r'<head>'
