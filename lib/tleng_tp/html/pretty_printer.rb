@@ -39,9 +39,9 @@ module TLengTP
 
       # Nodes visitor methods
       def handle_root(node)
-        print_doc_header
+        print_document_header
         handle_block_tag(node)
-        print_doc_footer
+        print_document_footer
       end
 
       def handle_head(node)
@@ -85,11 +85,11 @@ module TLengTP
       end
 
     private
-      def print_doc_header
+      def print_document_header
         @output.print(OUTPUT_HEADER)
       end
 
-      def print_doc_footer
+      def print_document_footer
         @output.print(OUTPUT_FOOTER)
       end
 
