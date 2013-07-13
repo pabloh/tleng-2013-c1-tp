@@ -7,7 +7,7 @@ La instalación es muy sencilla en cualquier version razonablemente actual de Ub
 
 - Instalar una version reciente de Ruby ejecutando:
 
-    sudo apt-get install ruby1.9.1-full
+    sudo apt-get install ruby1.9.1-full rake
 
 - Luego instalar la gema 'racc', necesaria para generar el parser:
 
