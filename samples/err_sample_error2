@@ -1,4 +1,4 @@
-/home/pablo/Proyectos/tleng-2013-c1-tp/lib/tleng_tp/lexer.rb:73:in `next_token': Error parsing input: unrecognized string '<pre>Documento' (RuntimeError)
+/home/pablo/Proyectos/tleng-2013-c1-tp/lib/tleng_tp/lexer.rb:73:in `next_token': Error parsing input: unrecognized string '<pre>Este' (RuntimeError)
 	from /home/pablo/Proyectos/tleng-2013-c1-tp/lib/tleng_tp/parser.rb:23:in `next_token'
 	from (eval):3:in `_racc_do_parse_c'
 	from (eval):3:in `do_parse'
