@@ -12,12 +12,16 @@ module TLengTP
     class Tag < Node
       attr_reader :childs
 
-      def initialize(childs = [])
-        @childs = childs
+      def initialize(*childs)
+        @childs = childs.compact
       end
 
       def tag_name
         self.class.class_name.downcase
+      end
+
+      def to_s
+        ["<#{tag_name}>", *childs.map(&:to_s), "</#{tag_name}>"].join(' ')
       end
     end
 
@@ -71,6 +75,10 @@ module TLengTP
       def accept(visitor)
         visitor.handle_line_break(self)
       end
+
+      def to_s
+        '<br/>'
+      end
     end
 
     class Script < Tag
@@ -95,6 +103,10 @@ module TLengTP
 
       def accept(visitor)
         visitor.handle_text(self)
+      end
+
+      def to_s
+        content
       end
     end
 
