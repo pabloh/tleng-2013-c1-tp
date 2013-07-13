@@ -1,0 +1,26 @@
+#! /usr/bin/env ruby
+
+$: << File.expand_path("../../lib", __FILE__)
+
+require 'tleng_tp'
+
+USAGE=<<END
+Modo de uso:
+
+  Ingrese el text con el html a formatear al commando html_pp por stdin para obtenerlo formateado en stdout
+END
+
+if $0 == __FILE__
+  if $*.include?('--help')
+    puts USAGE
+    exit 0
+  end
+
+  include TLengTP
+
+  lexer = Lexer.new(&stdin) 
+  parser = Parser.new(lexer)
+  printer = HTML::PrettyPrinter.new(parser.parse)
+  
+  $stdout.print(printer.generate_output)
+end
