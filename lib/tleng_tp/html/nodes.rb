@@ -21,7 +21,11 @@ module TLengTP
       end
 
       def to_s
-        ["<#{tag_name}>", *childs.map(&:to_s), "</#{tag_name}>"].join(' ')
+        if childs.any?
+          ["<#{tag_name}>", *childs.map(&:to_s), "</#{tag_name}>"].join(' ')
+        else
+          "<#{tag_name}></#{tag_name}>"
+        end
       end
     end
 
@@ -82,11 +86,12 @@ module TLengTP
     end
 
     class Script < Tag
-      attr_reader :content
-
       def initialize(content)
-        @content = content
-        @childs = []
+        @childs = [content]
+      end
+
+      def content
+        @childs.first
       end
 
       def accept(visitor)
