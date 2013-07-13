@@ -25,7 +25,7 @@ module TLengTP
     SCRIPT_CONTENT  = /.*?(?=<\/script>)/m
 
     WHITE_SPACE     = /\s+/
-    COMMENT         = /<!--.*?-->/
+    COMMENT         = /<!--.*?-->/m
 
     def initialize(input)
       @scanner = StringScanner.new(input.read)
