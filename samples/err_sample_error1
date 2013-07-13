@@ -1,0 +1,6 @@
+/home/pablo/Proyectos/tleng-2013-c1-tp/lib/tleng_tp/parser.rb:31:in `on_error':  (RuntimeError)
+parse error on value "<p>" (P_OPEN)
+	from (eval):3:in `_racc_do_parse_c'
+	from (eval):3:in `do_parse'
+	from /home/pablo/Proyectos/tleng-2013-c1-tp/lib/tleng_tp/parser.rb:27:in `parse'
+	from bin/html_pp:23:in `<main>'
