@@ -19,7 +19,7 @@ module TLengTP
     H1_CLOSE        = %r'</h1>'
     P_OPEN          = %r'<p>'
     P_CLOSE         = %r'</p>'
-    LINE_BREAK      = %r'<br/>'
+    LINE_BREAK      = %r'<br/?>'
 
     TEXT            = /[^<>\s](?:[^<>]*[^<>\s])?/m
     SCRIPT_CONTENT  = /.*?(?=<\/script>)/m
